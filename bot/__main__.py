@@ -35,27 +35,28 @@ def stats(update, context):
     cpuUsage = psutil.cpu_percent(interval=0.5)
     memory = psutil.virtual_memory().percent
     disk = psutil.disk_usage('/').percent
-    stats = f'<b>Bot Uptime:</b> {currentTime}\n' \
-            f'<b>Start Time:</b> {current}\n' \
-            f'<b>Total Disk Space:</b> {total}\n' \
-            f'<b>Used:</b> {used}  ' \
-            f'<b>Free:</b> {free}\n\n' \
-            f'📊Data Usage📊\n<b>Upload:</b> {sent}\n' \
-            f'<b>Download:</b> {recv}\n\n' \
+    stats = f'<b>⌚Bot Uptime:</b> {currentTime}\n' \
+            f'<b>⏳Start Time:</b> {current}\n' \
+            f'<b>💿Total disk space:</b> {total}\n' \
+            f'<b>😬Used:</b> {used}  ' \
+            f'<b>😌Free:</b> {free}\n\n' \
+            f'📊Data Usage📊\n<b>⬆️Up:</b> {sent}\n' \
+            f'<b>⬇️Down:</b> {recv}\n\n' \
             f'<b>CPU:</b> {cpuUsage}%\n' \
-            f'<b>RAM:</b> {memory}%\n' \
-            f'<b>DISK:</b> {disk}%'
+            f'<b>💾RAM:</b> {memory}%\n' \
+            f'<b>💿Disk:</b> {disk}%'
     update.effective_message.reply_photo(IMAGE_URL, stats, parse_mode=ParseMode.HTML)
 
 
 def start(update, context):
     start_string = f'''
-This bot can mirror all your links to Google Drive!
+This is a bot which can mirror all your links to Google drive!
+By: @Debojit16 💝
 Type /{BotCommands.HelpCommand} to get a list of available commands
 '''
     buttons = button_build.ButtonMaker()
-    buttons.buildbutton("Repo", "https://github.com/breakdowns/slam-mirrorbot")
-    buttons.buildbutton("Support Group", "https://t.me/SlamMirrorSupport")
+    buttons.buildbutton("Repo", "https://github.com/debojit16mitra/My-Python-Aria-Final-Mirror-Bot--Jul2021")
+    buttons.buildbutton("Support Group", "https://t.me/joinchat/TdXWZTyoKJM7X-bD")
     reply_markup = InlineKeyboardMarkup(buttons.build_menu(2))
     LOGGER.info('UID: {} - UN: {} - MSG: {}'.format(update.message.chat.id, update.message.chat.username, update.message.text))
     uptime = get_readable_time((time.time() - botStartTime))
@@ -65,7 +66,7 @@ Type /{BotCommands.HelpCommand} to get a list of available commands
         else :
             update.effective_message.reply_photo(IMAGE_URL, start_string, parse_mode=ParseMode.MARKDOWN, reply_markup=reply_markup)
     else :
-        sendMessage(f"Oops! not a Authorized user.", context.bot, update)
+        sendMessage(f"Oops! Not a Authorized user. Ask Admin to Authorize you", context.bot, update)
 
 
 def restart(update, context):
@@ -91,65 +92,38 @@ def log(update, context):
 
 def bot_help(update, context):
     help_string_adm = f'''
-/{BotCommands.HelpCommand}: To get this message
+/{BotCommands.HelpCommand}: Need Help?? Off course for this message🥴.
+/{BotCommands.MirrorCommand} [download_url][magnet_link]: To Start mirroring the link to google drive✨.
+/{BotCommands.TarMirrorCommand} [download_url][magnet_link]: Start mirroring and upload the archived (.tar) version of the download🏴󠁡󠁺󠁧󠁯󠁲󠁿.
+/{BotCommands.UnzipMirrorCommand} [download_url][magnet_link]: Starts mirroring and if downloaded file is any archive , extracts it to google drive🤐.
+/{BotCommands.CloneCommand} [drive_url]: To clone from google drive😉.
+/{BotCommands.WatchCommand} [youtube-dl supported link]: Mirror through youtube-dl. Click /{BotCommands.WatchCommand} for more help▶️.
+/{BotCommands.TarWatchCommand} [youtube-dl supported link]: Mirror through youtube-dl and tar before uploading.▷
+/{BotCommands.CancelMirror}: Reply to the message by which the download was initiated and that download will be cancelled🚫.
+/{BotCommands.CancelAllCommand}: Cancel all running tasks❌🚫.
+/{BotCommands.ListCommand} [search term]: Searches the search term in the Google Drive, If found replies with the link🔍.
+/{BotCommands.StatusCommand}: Shows a status of all the downloads😎.
+/{BotCommands.PingCommand}: Check how long it takes to Ping the Bot🏓.
+/{BotCommands.SpeedCommand}: Check Internet Speed of the Host⚡️💨.
+/{BotCommands.MediaInfoCommand}: Get detailed info about replied media (Only for Telegram file)🗃️.
+/{BotCommands.TsHelpCommand}: Get help for Torrent search module🔍.
 
-/{BotCommands.MirrorCommand} [download_url][magnet_link]: Start mirroring the link to Google Drive
-
-/{BotCommands.TarMirrorCommand} [download_url][magnet_link]: Start mirroring and upload the archived (.tar) version of the download
-
-/{BotCommands.UnzipMirrorCommand} [download_url][magnet_link]: Starts mirroring and if downloaded file is any archive, extracts it to Google Drive
-
-/{BotCommands.CloneCommand} [drive_url]: Copy file/folder to Google Drive
-
-/{BotCommands.CountCommand} [drive_url]: Count file/folder of Google Drive Links
-
-/{BotCommands.DeleteCommand} [drive_url]: Delete file from Google Drive (Only Owner & Sudo)
-
-/{BotCommands.WatchCommand} [youtube-dl supported link]: Mirror through youtube-dl. Click /{BotCommands.WatchCommand} for more help
-
-/{BotCommands.TarWatchCommand} [youtube-dl supported link]: Mirror through youtube-dl and tar before uploading
-
-/{BotCommands.CancelMirror}: Reply to the message by which the download was initiated and that download will be cancelled
-
-/{BotCommands.CancelAllCommand}: Cancel all running tasks
-
-/{BotCommands.ListCommand} [search term]: Searches the search term in the Google Drive, If found replies with the link
-
-/{BotCommands.StatusCommand}: Shows a status of all the downloads
-
-/{BotCommands.StatsCommand}: Show Stats of the machine the bot is hosted on
-
-/{BotCommands.PingCommand}: Check how long it takes to Ping the Bot
-
-/{BotCommands.AuthorizeCommand}: Authorize a chat or a user to use the bot (Can only be invoked by Owner & Sudo of the bot)
-
-/{BotCommands.UnAuthorizeCommand}: Unauthorize a chat or a user to use the bot (Can only be invoked by Owner & Sudo of the bot)
-
-/{BotCommands.AuthorizedUsersCommand}: Show authorized users (Only Owner & Sudo)
-
-/{BotCommands.AddSudoCommand}: Add sudo user (Only Owner)
-
-/{BotCommands.RmSudoCommand}: Remove sudo users (Only Owner)
-
-/{BotCommands.RestartCommand}: Restart the bot
-
-/{BotCommands.LogCommand}: Get a log file of the bot. Handy for getting crash reports
-
-/{BotCommands.ConfigMenuCommand}: Get Info Menu about bot config (Owner Only)
-
-/{BotCommands.UpdateCommand}: Update Bot from Upstream Repo (Owner Only)
-
-/{BotCommands.UsageCommand}: To see Heroku Dyno Stats (Owner & Sudo only)
-
-/{BotCommands.SpeedCommand}: Check Internet Speed of the Host
-
-/{BotCommands.MediaInfoCommand}: Get detailed info about replied media (Only for Telegram file)
-
-/{BotCommands.ShellCommand}: Run commands in Shell (Terminal)
-
-/{BotCommands.ExecHelpCommand}: Get help for Executor module
-
-/{BotCommands.TsHelpCommand}: Get help for Torrent search module
+𝐅𝐨𝐫 𝐒𝐮𝐝𝐨 𝐚𝐧𝐝 𝐀𝐝𝐦𝐢𝐧𝐬:
+/{BotCommands.CountCommand} [drive_url]: Count file/folder and Size of Google Drive Link count🔢.
+/{BotCommands.DeleteCommand} [drive_url]: Delete file from Google Drive (Only Owner & Sudo)❌.
+/{BotCommands.StatsCommand}: Show Stats of the machine the bot is hosted on😁😁.
+/{BotCommands.AuthorizeCommand}: Authorize a chat or a user to use the bot (Can only be invoked by Owner & Sudo of the bot)🔗.
+/{BotCommands.UnAuthorizeCommand}: Unauthorize a chat or a user to use the bot (Can only be invoked by Owner & Sudo of the bot)🙏..
+/{BotCommands.AuthorizedUsersCommand}: Show authorized users (Only Owner & Sudo)🔗🙏.
+/{BotCommands.AddSudoCommand}: Add sudo user (Only Owner)👥.
+/{BotCommands.RmSudoCommand}: Remove sudo users (Only Owner)🚫👥.
+/{BotCommands.RestartCommand}: Restart the bot🔄.
+/{BotCommands.LogCommand}: Get a log file of the bot. Handy for getting crash reports📜.
+/{BotCommands.ConfigMenuCommand}: Get Info Menu about bot config (Owner Only)⚙️.
+/{BotCommands.UpdateCommand}: Update Bot from Upstream Repo🆕.
+/{BotCommands.UsageCommand}: To see Heroku Dyno Stats📊.
+/{BotCommands.ShellCommand}: Run commands in Shell (Terminal)🚀.
+/{BotCommands.ExecHelpCommand}: Get help for Executor module🏃.
 '''
 
     help_string = f'''
@@ -220,7 +194,7 @@ def main():
     if os.path.isfile(".restartmsg"):
         with open(".restartmsg") as f:
             chat_id, msg_id = map(int, f)
-        bot.edit_message_text("Restarted successfully!", chat_id, msg_id)
+        bot.edit_message_text("Restarted successfully!😂", chat_id, msg_id)
         os.remove(".restartmsg")
     bot.set_my_commands(botcmds)
 
