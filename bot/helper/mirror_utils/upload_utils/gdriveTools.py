@@ -659,7 +659,7 @@ class GoogleDriveHelper:
                 msg += f'\n<b>⌨️Type: </b><code>Folder</code>'
                 msg += f'\n<b>🔀SubFolders: </b><code>{self.total_folders}</code>'
                 msg += f'\n<b>🗃️Files: </b><code>{self.total_files}</code>'
-                msg += f'<b>BY:Büññy®💖</b>
+                msg += f'<b>BY💖Büññy💖</b>
             else:
                 msg += f'<b>Filename: </b><code>{name}</code>'
                 try:
