@@ -71,7 +71,7 @@ NTFS, RPM, SquashFS, UDF, VHD, XAR, Z.
 
 # How to deploy?
    
-    [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/debojit16mitra/My-Python-Aria-Final-Mirror-Bot--Jul2021)
+    [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/debojit16mitra/My-Python-Aria-Final-Mirror-Bot--Jul2021/tree/master)
     
 Deploying is pretty much straight forward and is divided into several steps as follows:
 ## Installing requirements
